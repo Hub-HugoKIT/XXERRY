@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XXERRY – Propuesta de Servicios Coreográficos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Pastel Harmony -->
+    <!-- Application Structure Plan: Se ha diseñado una aplicación de una sola página con un flujo vertical lógico para guiar al cliente (padres de familia) a través de la propuesta de valor. La estructura comienza con una introducción, detalla los servicios incluidos, presenta una sección interactiva de inversión con un gráfico y un calculador dinámico, muestra los servicios opcionales y finaliza con las condiciones y un llamado a la acción. Esta estructura fue elegida porque transforma una propuesta estática en una experiencia atractiva, permitiendo a los usuarios interactuar con la información más crítica (el costo) de una manera intuitiva, lo que facilita la toma de decisiones. -->
+    <!-- Visualization & Content Choices: Inversión Total -> Goal: Informar y Comparar -> Viz: Gráfico de Donut de Chart.js para desglosar los costos fijos y un control deslizante (slider) con texto dinámico para calcular el costo por participante. -> Interaction: El slider actualiza el costo por persona en tiempo real. -> Justification: El gráfico hace que la composición del costo sea transparente y fácil de entender, mientras que el slider responde a la pregunta principal del cliente ("¿cuánto costará para mi hija?") de forma inmediata e interactiva. | Servicios Incluidos/Opcionales -> Goal: Organizar e Informar -> Presentation: Tarjetas con íconos Unicode y Tailwind CSS. -> Interaction: Efectos visuales sutiles al pasar el cursor. -> Justification: Mejora la legibilidad y el atractivo visual en comparación con una lista o tabla simple, haciendo que los servicios sean más fáciles de escanear. Library: Chart.js y Vanilla JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #8B5CF6;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #E5E7EB;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-[#FFF8F0] text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
+
+        <header class="text-center my-8">
+            <h1 class="text-5xl md:text-6xl font-bold text-violet-600">XXERRY</h1>
+            <p class="text-lg md:text-xl mt-2 text-gray-600">🩰 “Donde el ritmo se convierte en expresión” 👯‍♀️</p>
+            </main>
+            <nav>
+                <ul>
+                <li>
+                <div class="mt-6 text-center">
+                <section id="intro" class="bg-white/60 p-6 rounded-2xl shadow-lg mb-12 ring-1 ring-black ring-opacity-5">
+                <h4 class="text-2xl font-bold text-violet-600 mb-3"> 
+                <li><a href="contacto.html">Contactar</a></li></h4>
+                                            
+                    <a href="tel:3202543316" class="bg-violet-300 text-white font-bold py-3 px-8 rounded-full hover:bg-violet-700 transition-colors duration-300 text-lg inline-block">
+                        Whatsapp: 320 254 3316
+                    </a>
+        </header>
+
+        <main>
+            <section id="intro" class="bg-white/60 p-6 rounded-2xl shadow-lg mb-12 ring-1 ring-black ring-opacity-5">
+                <h2 class="text-2xl font-bold text-violet-600 mb-4">Una Experiencia de Baile Inolvidable</h2>
+                <p class="text-gray-700">
+                    Esta propuesta está diseñada para crear una coreografía única y moderna para una presentación escolar. Nos enfocamos en un grupo de hasta 10 niñas de secundaria, sin necesidad de experiencia previa, garantizando un proceso divertido, educativo y un resultado final del que todas se sentirán orgullosas.
+                </p>
+            </section>
+
+            <section id="servicios-incluidos" class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8">Paquete Coreográfico Completo</h2>
+                 <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Nuestro servicio integral cubre todos los aspectos necesarios para asegurar una presentación exitosa, desde la creación del baile hasta el soporte técnico el día del evento.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <p class="text-4xl mb-3">💃</p>
+                        <h3 class="font-bold text-lg mb-2">Diseño Coreográfico</h3>
+                        <p class="text-sm text-gray-600">Adaptado a nivel principiante con un estilo moderno y juvenil que encantará a las participantes.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <p class="text-4xl mb-3">🗓️</p>
+                        <h3 class="font-bold text-lg mb-2">Prácticas Guiadas</h3>
+                        <p class="text-sm text-gray-600">7 sesiones de 1.5 horas cada una durante una semana intensiva de preparación.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <p class="text-4xl mb-3">🎭</p>
+                        <h3 class="font-bold text-lg mb-2">Ensayo General</h3>
+                        <p class="text-sm text-gray-600">Una sesión final para pulir detalles y preparar el acto para el escenario.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <p class="text-4xl mb-3">🎶</p>
+                        <h3 class="font-bold text-lg mb-2">Reproducción Musical</h3>
+                        <p class="text-sm text-gray-600">Llevamos nuestro propio equipo de sonido profesional (parlante/amplificador).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <p class="text-4xl mb-3">📹</p>
+                        <h3 class="font-bold text-lg mb-2">Grabación del Acto</h3>
+                        <p class="text-sm text-gray-600">Registro con celular del ensayo o la presentación para un recuerdo especial.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <p class="text-4xl mb-3">🎬</p>
+                        <h3 class="font-bold text-lg mb-2">Edición de Video Básica</h3>
+                        <p class="text-sm text-gray-600">Un montaje digital simple del video grabado, con música y título.</p>
+                    </div>
+                </div>
+                 <div class="mt-8 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-lg">
+                    <p class="font-bold">¡Nuevo! Captura para Redes</p>
+                    <p>Grabación de clips cortos (shorts/reels) durante las prácticas, sin costo adicional, para compartir el proceso.</p>
+                </div>
+            </section>
+
+            <section id="inversion" class="bg-white/60 p-6 md:p-8 rounded-2xl shadow-lg mb-12 ring-1 ring-black ring-opacity-5">
+                <h2 class="text-3xl font-bold text-center mb-2">Inversión y Desglose</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Te presentamos una vista transparente de la inversión total. Utiliza el control deslizante para ver cómo cambia el costo por persona según el tamaño del grupo.</p>
+                <div class="flex flex-col lg:flex-row items-center gap-8">
+                    <div class="w-full lg:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2">
+                        <div class="bg-white p-6 rounded-xl shadow-inner">
+                            <h3 class="font-bold text-lg mb-4">Calcula tu Inversión</h3>
+                             <div class="flex justify-between items-baseline mb-2">
+                                <span class="text-gray-600">Número de participantes:</span>
+                                <span id="participantsCount" class="text-2xl font-bold text-violet-600">10</span>
+                            </div>
+                            <input type="range" min="1" max="10" value="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-track" id="participantsSlider">
+                           
+                            <div class="mt-6 pt-4 border-t">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-lg font-semibold">Costo por participante:</span>
+                                    <span id="costPerParticipant" class="text-2xl font-bold text-violet-600">$75.000</span>
+                                </div>
+                                <div class="flex justify-between items-center text-gray-600">
+                                    <span>Inversión Total:</span>
+                                    <span class="font-semibold">$750.000 COP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="servicios-opcionales" class="mb-12">
+                <h2 class="text-3xl font-bold text-center mb-8">Potencia la Experiencia (Opcional)</h2>
+                 <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Si desean llevar la presentación a otro nivel, ofrecemos estos servicios adicionales para complementar el paquete básico.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white/70 p-6 rounded-2xl border border-dashed border-violet-300">
+                         <p class="text-4xl mb-3">👗</p>
+                        <h3 class="font-bold text-lg mb-2">Asesoría de Vestuario</h3>
+                        <p class="text-sm text-gray-600 mb-3">Ayuda para elegir el atuendo perfecto que complemente la coreografía.</p>
+                        <p class="font-bold text-violet-600 text-lg">$50.000</p>
+                    </div>
+                    <div class="bg-white/70 p-6 rounded-2xl border border-dashed border-violet-300">
+                        <p class="text-4xl mb-3">✨</p>
+                        <h3 class="font-bold text-lg mb-2">Edición de Shorts para Redes</h3>
+                        <p class="text-sm text-gray-600 mb-3">Edición profesional de los clips grabados para un impacto máximo en redes.</p>
+                        <p class="font-bold text-violet-600 text-lg">$40.000</p>
+                    </div>
+                    <div class="bg-white/70 p-6 rounded-2xl border border-dashed border-violet-300">
+                        <p class="text-4xl mb-3">🏆</p>
+                        <h3 class="font-bold text-lg mb-2">Video Profesional</h3>
+                        <p class="text-sm text-gray-600 mb-3">Grabación con cámara profesional y edición avanzada para un recuerdo de alta calidad.</p>
+                        <p class="font-bold text-violet-600 text-lg">Desde $150.000</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="condiciones" class="bg-white/60 p-6 rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
+                <h2 class="text-2xl font-bold text-violet-600 mb-4">Condiciones y Siguientes Pasos</h2>
+                <ul class="list-disc list-inside text-gray-700 space-y-3">
+                    <li>El valor total de $750.000 COP puede dividirse equitativamente entre las participantes.</li>
+                    <li>Para garantizar la disponibilidad, se requiere confirmación con al menos <strong>3 días de anticipación</strong>.</li>
+                    <li>Para reservar o resolver cualquier duda, no dudes en contactarnos.</li>
+                </ul>
+                <div class="mt-6 text-center">
+                    <a href="tel:3202543316" class="bg-violet-600 text-white font-bold py-3 px-8 rounded-full hover:bg-violet-700 transition-colors duration-300 text-lg inline-block">
+                        Contactar: 320 25 43 316
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-gray-200">
+            <p class="text-gray-500">&copy; 2024 XERRY – Coreografías Juveniles. Todos los derechos reservados.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const investmentData = {
+            labels: [
+                'Sesiones Prácticas',
+                'Ensayo General',
+                'Uso de Parlante',
+                'Viáticos',
+                'Grabación',
+                'Edición Básica'
+            ],
+            datasets: [{
+                label: 'Desglose de Inversión',
+                data: [420000, 60000, 40000, 136000, 30000, 60000],
+                backgroundColor: [
+                    '#8B5CF6', 
+                    '#A78BFA', 
+                    '#C4B5FD', 
+                    '#D946EF', 
+                    '#F0ABFC',
+                    '#FBCFE8'  
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        const config = {
+            type: 'doughnut',
+            data: investmentData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 10
+                            },
+                             boxWidth: 12,
+                             padding: 15
+                        }
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            },
+        };
+
+        const investmentChart = new Chart(
+            document.getElementById('investmentChart'),
+            config
+        );
+
+        const slider = document.getElementById('participantsSlider');
+        const countEl = document.getElementById('participantsCount');
+        const costEl = document.getElementById('costPerParticipant');
+        const totalCost = 750000;
+
+        slider.addEventListener('input', (event) => {
+            const participants = parseInt(event.target.value);
+            countEl.textContent = participants;
+            const costPerPerson = totalCost / participants;
+            costEl.textContent = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(costPerPerson);
+        });
+    </script>
+
+</body>
+</html>
